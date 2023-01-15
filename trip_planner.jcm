@@ -1,0 +1,54 @@
+/*
+    trip_planner
+    ---------------------------
+
+    JaCaMo Application File
+
+    This file defines the initial state of the MAS (initial agents, environment, organisation, ....)
+
+    (see jacamo/doc/jcm.html for more information about what can be defined in this file)
+
+    JaCaMo 1.0
+    December 18, 2022 - 17:41:30
+*/
+
+mas trip_planner {
+
+    agent ca {
+    	goal: start
+    }
+    
+    agent toaA {
+    	focus: vacation.vacationgui
+    }
+    
+    agent toaB {
+    	focus: vacation.vacationgui
+    }
+    
+    agent toaC {
+    	focus: vacation.vacationgui
+    }
+    
+    agent scaA {
+    	focus: vacation.vacationgui
+    }
+    agent scaB {
+    	focus: vacation.vacationgui
+    }
+    agent scaC {
+    	focus: vacation.vacationgui
+    }
+    agent scaD {
+    	focus: vacation.vacationgui
+    }
+    agent scaE {
+    	focus: vacation.vacationgui
+    }
+    
+    workspace vacation {
+    	artifact vacationgui : simulator.HolidayPackage
+    }
+
+}
+

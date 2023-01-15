@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="http://moise.sourceforge.net/xml/os.xsl" type="text/xsl" ?>
+
+<organisational-specification
+    id="holiday_package"
+    os-version="0.8"
+
+    xmlns='http://moise.sourceforge.net/os'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:schemaLocation='http://moise.sourceforge.net/os
+                        http://moise.sourceforge.net/xml/os.xsd' >
+                        
+<structural-specification>
+
+<role-definitions>
+   <role id="consumer" />
+   <role id="accomodation_contractor" />          		
+   <role id="local_transportation_contractor" />       
+   <role id="food_contractor" />                  		
+   <role id="guide_contractor" />        		 		
+   <role id="flight_contractor" />        		 		
+   <role id="tour_operator" />        			 		
+</role-definitions>
+
+<group-specification id="holiday_package_group">
+ <roles>
+  <role id="consumer"          						min="1" max="1"/>
+  <role id="accomodation_contractor" 				min="1" max="1"/>
+  <role id="local_transportation_contractor"      	min="1" max="1"/>
+  <role id="food_contractor"                		min="1" max="1"/>
+  <role id="guide_contractor"                		min="1" max="1"/>
+  <role id="flight_contractor"                		min="1" max="1"/>
+  <role id="tour_operator"          				min="1" max="1"/>
+ </roles>
+
+ <links>
+  <link from="tour_operator"    type="authority"     to="accomodation_contractor" 		        scope="intra-group" />
+  <link from="tour_operator" 	type="authority" 	 to="local_transportation_contractor"       scope="intra-group" />
+  <link from="tour_operator"    type="authority"     to="food_contractor" 		                scope="intra-group" />
+  <link from="tour_operator"    type="authority"     to="guide_contractor" 		                scope="intra-group" />
+  <link from="tour_operator"    type="authority"     to="flight_contractor"                     scope="intra-group" />
+  <link from="consumer" 	    type="authority" 	 to="tour_operator"       		            scope="intra-group" />
+ </links>
+
+</group-specification>
+
+</structural-specification>
+
+<functional-specification>
+ <scheme id="go_on_trip_sch">
+   <goal id="tour_managed">
+     <plan operator="sequence">
+       <goal id="flight_provided"    			        ttf="10 days"/>
+       <goal id="accomodation_provided"    			    ttf="10 days"/>
+       <goal id="local_transportation_provided"         ttf="10 days" />
+       <goal id="guide_provided"                        ttf="10 days" />
+       <goal id="food_provided"      					ttf="10 days" />
+     </plan>
+   </goal>
+
+   <mission id="management_of_tour" min="1" max="1">
+     <goal id="tour_managed"/>
+   </mission>
+   <mission id="provide_flight" min="1" max="1">
+     <goal id="flight_provided"/>
+   </mission>
+   <mission id="provide_accomodation" min="1" max="1">
+     <goal id="accomodation_provided" />
+   </mission>
+   <mission id="provide_local_transportation" min="1" max="1">
+     <goal id="local_transportation_provided" />
+   </mission>
+   <mission id="provide_guide" min="1" max="1">
+     <goal id="guide_provided"/>
+   </mission>
+   <mission id="provide_food" min="1" max="1">
+     <goal id="food_provided" />
+   </mission>
+ </scheme>
+</functional-specification>
+<normative-specification>
+<norm id="n1"     type="obligation"    role="tour_operator"          				mission="management_of_tour"  />
+<norm id="n2"     type="obligation"    role="accomodation_contractor" 				mission="provide_accomodation" />
+<norm id="n3"     type="obligation"    role="local_transportation_contractor"       mission="provide_local_transportation" />
+<norm id="n4"     type="obligation"    role="food_contractor"           			mission="provide_food" />
+<norm id="n5"     type="obligation"    role="guide_contractor"              		mission="provide_guide" />
+<norm id="n5"     type="obligation"    role="flight_contractor"             		mission="provide_flight" />
+</normative-specification>
+                      
+</organisational-specification>                 
